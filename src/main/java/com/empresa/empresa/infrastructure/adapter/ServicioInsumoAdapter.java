@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.empresa.empresa.application.service.IServicioInsumoService;
 import com.empresa.empresa.domain.ServicioInsumo;
+import com.empresa.empresa.domain.ServicioInsumoPK;
 import com.empresa.empresa.infrastructure.repository.ServicioInsumoRepository;
 @Service
 public class ServicioInsumoAdapter implements IServicioInsumoService {
@@ -16,7 +17,7 @@ public class ServicioInsumoAdapter implements IServicioInsumoService {
     private ServicioInsumoRepository servicioInsumoRepository;
 
     @Override
-    public Optional<ServicioInsumo> findById(Long id) {
+    public Optional<ServicioInsumo> findById(ServicioInsumoPK id) {
         return servicioInsumoRepository.findById(id);
     }
 
@@ -31,7 +32,7 @@ public class ServicioInsumoAdapter implements IServicioInsumoService {
     }
 
     @Override
-    public ServicioInsumo update(Long id, ServicioInsumo servicioInsumo) {
+    public ServicioInsumo update(ServicioInsumoPK id, ServicioInsumo servicioInsumo) {
         return servicioInsumoRepository.findById(id)
             .map(existingServicioInsumo -> {
                 existingServicioInsumo.setId(servicioInsumo.getId());
@@ -41,7 +42,7 @@ public class ServicioInsumoAdapter implements IServicioInsumoService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(ServicioInsumoPK id) {
         servicioInsumoRepository.deleteById(id);
     }
 }

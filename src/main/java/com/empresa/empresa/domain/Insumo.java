@@ -14,7 +14,7 @@ public class Insumo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String codInterno;
     private String nombreInsumo;
     private Double valorUnit;
     private Integer stock;

@@ -1,9 +1,7 @@
 package com.empresa.empresa.domain;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -13,17 +11,27 @@ import lombok.Setter;
 @Entity
 public class ServicioInsumo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private ServicioInsumoPK id;
 
     @ManyToOne
-    @JoinColumn(name = "id_servicio")
+    @JoinColumn(name = "id_servicio", insertable = false, updatable = false)
     private Servicio servicio;
 
     @ManyToOne
-    @JoinColumn(name = "id_insumo")
+    @JoinColumn(name = "id_insumo", insertable = false, updatable = false)
     private Insumo insumo;
 
-    // Getters y setters
+    private int cantidadUsado;
+
+    // Constructor por defecto
+    public ServicioInsumo() {}
+
+    // Constructor con parámetros
+    public ServicioInsumo(int cantidadUsado, ServicioInsumoPK id, Insumo insumo, Servicio servicio) {
+        this.cantidadUsado = cantidadUsado;
+        this.id = id;
+        this.insumo = insumo;
+        this.servicio = servicio;
+    }
 }
