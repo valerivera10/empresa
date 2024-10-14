@@ -53,26 +53,48 @@ INSERT INTO `sucursal` (`fecha_creacion`, `ciudad_id`, `empresa_id`, `nit`, `nom
 ('2023-04-01', 1, 4, '321654987-0', 'Sucursal Bogotá D'),
 ('2023-05-01', 1, 5, '789123456-0', 'Sucursal Soacha E');
 
--- Insertar registros en tipo_persona
-INSERT INTO `tipo_persona` (`nombre`) VALUES
+-- Insertar registros en tipo_persona-- Insertar registros en tipo_persona
+INSERT INTO tipo_persona (nombre) VALUES
 ('cliente'),
-('Jurídica');
+('empleado'),
+('proveedor'),
+('profesional');
 
 -- Insertar registros en persona
-INSERT INTO `persona` (`fecha_registro`, `id_sucursal`, `nro_doc`, `tipo_persona_id`, `apellido`, `nombre`) VALUES
+INSERT INTO persona (fecha_registro, id_sucursal, nro_doc, tipo_persona_id, apellido, nombre) VALUES
 ('2023-01-01', 1, '1010101010', 1, 'Gómez', 'Juan'),
 ('2023-01-02', 1, '2020202020', 1, 'Pérez', 'María'),
 ('2023-01-03', 2, '3030303030', 1, 'López', 'Carlos'),
 ('2023-01-04', 3, '4040404040', 1, 'Martínez', 'Ana'),
-('2023-01-05', 4, '5050505050', 2, 'Rodríguez', 'Luis');
+('2023-01-05', 4, '5050505050', 2, 'Rodríguez', 'Luis'),
+('2023-01-06', 5, '3324324234', 3, 'Importaciones', 'Gómez'),
+('2023-01-06', 5, '3523424453', 4, 'martinez', 'camilo');
+
+
+-- Insertar registros en tipo_telefono
+INSERT INTO tipo_telefono (descripcion) VALUES
+('Móvil'),
+('Fijo'),
+('Fax'),
+('Trabajo'),
+('Personal');
+
+-- Insertar números de teléfono
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('1010101010', '1010101010', 1); -- Móvil de Juan Gómez
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('2020202020', '2020202020', 1); -- Móvil de María Pérez
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('3030303030', '3030303030', 1); -- Móvil de Carlos López
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('4040404040', '4040404040', 3); -- Fax de Ana Martínez
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('5050505050', '5050505050', 2); -- Fijo de Luis Rodríguez
+INSERT INTO tel_persona (nro, nro_doc, id_tipo_tel) VALUES ('3324324234', '3324324234', 4); -- Trabajo de Importaciones Gómez
+
 
 -- Insertar registros en orden_servicio
 INSERT INTO `orden_servicio` (`fecha_orden`, `id_cliente`, `id_empleado`, `id_estado`) VALUES
 ('2023-06-01', 1010101010, 5050505050, 1),
 ('2023-06-02', 2020202020, 5050505050, 2),
 ('2023-06-03', 3030303030, 5050505050, 3),
-('2023-06-04', 3030303030, 5050505050, 4),
-('2023-06-05', 3030303030, 5050505050, 5);
+('2023-06-04', 3030303030, 3523424453, 4),
+('2023-06-05', 3030303030, 3523424453, 5);
 
 -- Insertar registros en servicio
 INSERT INTO `servicio` (`requiere_insumo`, `nombre`) VALUES
@@ -103,8 +125,8 @@ INSERT INTO `orden_trabajo` (`fecha_asignacion`, `id_empleado`, `hora_asignacion
 ('2023-06-01', 1, '09:00', 'OT-001'),
 ('2023-06-02', 2, '10:00', 'OT-002'),
 ('2023-06-03', 1, '11:00', 'OT-003'),
-('2023-06-04', 2, '12:00', 'OT-004'),
-('2023-06-05', 1, '13:00', 'OT-005');
+('2023-06-04', 3523424453, '12:00', 'OT-004'),
+('2023-06-05', 3523424453, '13:00', 'OT-005');
 
 -- Insertar registros en detalle_orden_trabajo
 INSERT INTO `detalle_orden_trabajo` (`fecha`, `estado_orden_serv_id`, `orden_trabajo_id`, `servicio_asignado_id`) VALUES
