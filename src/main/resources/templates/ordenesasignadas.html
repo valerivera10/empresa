@@ -40,7 +40,7 @@
             });
         }
 
-        // Función para verificar detalles de orden de trabajo por ID de servicio
+        
         async function verificarDetalles() {
             const servicioId = document.getElementById('servicioSelect').value;
             const response = await fetch(`/api/servicio/${servicioId}`);
@@ -54,7 +54,7 @@
 
             const detallesDeServicio = detalles.filter(detalle => detalle.servicio.id == servicioId);
             const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = ''; // Limpiar resultados anteriores
+            resultDiv.innerHTML = ''; 
 
             if (detallesDeServicio.length > 0) {
                 // Crear la tabla

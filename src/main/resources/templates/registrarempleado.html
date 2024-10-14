@@ -13,8 +13,8 @@
 
             sucursales.forEach(sucursal => {
                 const option = document.createElement('option');
-                option.value = sucursal.id; // Asegúrate de que el ID de la sucursal esté correcto
-                option.textContent = sucursal.nombre; // Cambia "nombre" al campo correcto
+                option.value = sucursal.id; 
+                option.textContent = sucursal.nombre; 
                 sucursalSelect.appendChild(option);
             });
         }
@@ -34,8 +34,8 @@
                 nombre: nombre,
                 apellido: apellido,
                 fechaRegistro: fechaRegistro,
-                sucursal: { id: idSucursal }, // Asegúrate de que este campo coincida con tu modelo
-                tipoPersona: { id: 2 } // Suponiendo que el ID del tipo "empleado" es 1
+                sucursal: { id: idSucursal }, 
+                tipoPersona: { id: 2 } 
             };
 
             const response = await fetch('/api/persona', {

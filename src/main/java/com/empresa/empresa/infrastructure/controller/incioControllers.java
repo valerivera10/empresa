@@ -23,7 +23,7 @@ public class incioControllers {
    
     @GetMapping("/login")
     public String login() {
-        return "login"; // Devuelve la vista login.html
+        return "login"; 
     }
 
     @GetMapping("/servicioinsumo")
@@ -55,5 +55,63 @@ public class incioControllers {
     public String visualizarcliente(Model model){
         return "visualizarcliente";
     }
+
+
+
+
+
+    @GetMapping("/Visulizarinsumos")
+    public String Visulizarinsumos(Model model){
+        return "Visulizarinsumos";
+    }
+    @GetMapping("/VisualizarInsumosProveedores")
+    public String VisualizarInsumosProveedores(Model model){
+        return "VisualizarInsumosProveedores";
+    }
+    @GetMapping("/Caso11")
+    public String Caso11(Model model){
+        return "Caso11";
+    }
+    @GetMapping("/Caso12")
+    public String Caso12(Model model){
+        return "Caso12";
+    }
+    @GetMapping("/Caso13")
+    public String Caso13(Model model){
+        return "Caso13";
+    }
+    @GetMapping("/Caso14")
+    public String Caso14(Model model){
+        return "Caso14";
+    }
+    @GetMapping("/Caso15")
+    public String Caso15(Model model){
+        return "Caso15";
+    }
+    @GetMapping("/Caso16")
+    public String Caso16(Model model){
+        return "Caso16";
+    }
+    @GetMapping("/Caso17")
+    public String Caso17(Model model){
+        return "Caso17";
+    }
+    @GetMapping("/Caso18")
+    public String Caso18(Model model){
+        return "Caso18";
+    }
+    @GetMapping("/Caso19")
+    public String Caso19(Model model){
+        return "Caso19";
+    }
+    @GetMapping("/Caso20")
+    public String Caso20(Model model){
+        return "Caso20";
+    }
+    @GetMapping("/Caso21")
+    public String Caso21(Model model){
+        return "Caso21";
+    }
+    
 }
 
