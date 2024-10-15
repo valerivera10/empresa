@@ -1,11 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestión de Entidades</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1 class="mt-5">Gestión de Entidades</h1>
+
+        <!-- Sección de Persona -->
+        <h2 class="mt-4">Crear Persona</h2>
+        <form id="personaForm">
+            <input type="number" id="nroDoc" placeholder="Número de Documento" required class="form-control">
+            <input type="text" id="nombre" placeholder="Nombre" required class="form-control">
+            <input type="text" id="apellido" placeholder="Apellido" required class="form-control">
+            <input type="date" id="fechaRegistro" required class="form-control">
+            <select id="sucursalId" required class="form-control"></select>
+            <select id="tipoPersonaId" required class="form-control"></select>
+            <button type="submit" class="btn btn-primary mt-2">Guardar Persona</button>
+        </form>
+
+        <!-- Sección de Empresa -->
+        <h2 class="mt-4">Crear Empresa</h2>
+        <form id="empresaForm">
+            <input type="text" id="nombreEmpresa" placeholder="Nombre de Empresa" required class="form-control">
+            <select id="tipoEmpresaId" required class="form-control"></select>
+            <button type="submit" class="btn btn-primary mt-2">Guardar Empresa</button>
+        </form>
+
+        <!-- Sección de Servicio -->
+        <h2 class="mt-4">Crear Servicio</h2>
+        <form id="servicioForm">
+            <input type="text" id="nombreServicio" placeholder="Nombre de Servicio" required class="form-control">
+            <input type="checkbox" id="requiereInsumo"> Requiere Insumo
+            <button type="submit" class="btn btn-primary mt-2">Guardar Servicio</button>
+        </form>
+
+        <!-- Sección de Sucursal -->
+        <h2 class="mt-4">Crear Sucursal</h2>
+        <form id="sucursalForm">
+            <input type="text" id="nombreSuc" placeholder="Nombre de Sucursal" required class="form-control">
+            <input type="text" id="nit" placeholder="NIT" required class="form-control">
+            <input type="date" id="fechaCreacion" required class="form-control">
+            <select id="ciudadId" required class="form-control"></select>
+            <select id="empresaSucursalId" required class="form-control"></select>
+            <button type="submit" class="btn btn-primary mt-2">Guardar Sucursal</button>
+        </form>
+
+        <!-- Sección de Insumo -->
+        <h2 class="mt-4">Crear Insumo</h2>
+        <form id="insumoForm">
+            <input type="text" id="codInterno" placeholder="Código Interno" required class="form-control">
+            <input type="text" id="nombreInsumo" placeholder="Nombre de Insumo" required class="form-control">
+            <input type="number" id="valorUnit" placeholder="Valor Unitario" required class="form-control">
+            <input type="number" id="stock" placeholder="Stock" required class="form-control">
+            <input type="number" id="stockMin" placeholder="Stock Mínimo" required class="form-control">
+            <input type="number" id="stockMax" placeholder="Stock Máximo" required class="form-control">
+            <button type="submit" class="btn btn-primary mt-2">Guardar Insumo</button>
+        </form>
+
+        <script>
+            // Función para cargar datos de las claves foráneas
+            async function cargarSelects() {
+                const sucursales = await fetch('/api/sucursal').then(res => res.json());
+                const tiposPersona = await fetch('/api/tipopersona').then(res => res.json());
+                const tiposEmpresa = await fetch('/api/tipoempresa').then(res => res.json());
+                const ciudades = await fetch('/api/ciudad').then(res => res.json());
+                const empresas = await fetch('/api/empresa').then(res => res.json());
+
+                // Llenar select para sucursales
+                const sucursalSelect = document.getElementById('sucursalId');
+                sucursales.forEach(sucursal => {
+                    const option = document.createElement('option');
+                    option.value = sucursal.id;
+                    option.textContent = sucursal.nombreSuc;
+                    sucursalSelect.appendChild(option);
+                });
+
+                // Llenar select para tipos de persona
+                const tipoPersonaSelect = document.getElementById('tipoPersonaId');
+                tiposPersona.forEach(tipo => {
+                    const option = document.createElement('option');
+                    option.value = tipo.id;
+                    option.textContent = tipo.nombre;
+                    tipoPersonaSelect.appendChild(option);
+                });
+
+                // Llenar select para tipos de empresa
+                const tipoEmpresaSelect = document.getElementById('tipoEmpresaId');
+                tiposEmpresa.forEach(tipo => {
+                    const option = document.createElement('option');
+                    option.value = tipo.id;
+                    option.textContent = tipo.descripcion;
+                    tipoEmpresaSelect.appendChild(option);
+                });
+
+                // Llenar select para ciudades
+                const ciudadSelect = document.getElementById('ciudadId');
+                ciudades.forEach(ciudad => {
+                    const option = document.createElement('option');
+                    option.value = ciudad.id;
+                    option.textContent = ciudad.nombre;
+                    ciudadSelect.appendChild(option);
+                });
+
+                // Llenar select para empresas en Sucursal
+                const empresaSucursalSelect = document.getElementById('empresaSucursalId');
+                empresas.forEach(empresa => {
+                    const option = document.createElement('option');
+                    option.value = empresa.id;
+                    option.textContent = empresa.nombre;
+                    empresaSucursalSelect.appendChild(option);
+                });
+            }
+
+            // Cargar datos al inicio
+            window.onload = cargarSelects;
+
+            // Manejar el envío de formularios
+            document.getElementById('personaForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const response = await fetch('/api/persona', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nroDoc: document.getElementById('nroDoc').value,
+                        nombre: document.getElementById('nombre').value,
+                        apellido: document.getElementById('apellido').value,
+                        fechaRegistro: document.getElementById('fechaRegistro').value,
+                        sucursal: { id: document.getElementById('sucursalId').value },
+                        tipoPersona: { id: document.getElementById('tipoPersonaId').value }
+                    }),
+                });
+
+                alert(response.ok ? 'Persona guardada con éxito' : 'Error al guardar la persona');
+                document.getElementById('personaForm').reset();
+            };
+
+            document.getElementById('empresaForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const response = await fetch('/api/empresa', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: document.getElementById('nombreEmpresa').value,
+                        tipoEmpresa: { id: document.getElementById('tipoEmpresaId').value }
+                    }),
+                });
+                alert(response.ok ? 'Empresa guardada con éxito' : 'Error al guardar la empresa');
+                document.getElementById('empresaForm').reset();
+            };
+
+            document.getElementById('servicioForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const response = await fetch('/api/servicio', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: document.getElementById('nombreServicio').value,
+                        requiereInsumo: document.getElementById('requiereInsumo').checked,
+                    }),
+                });
+                alert(response.ok ? 'Servicio guardado con éxito' : 'Error al guardar el servicio');
+                document.getElementById('servicioForm').reset();
+            };
+
+            document.getElementById('sucursalForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const response = await fetch('/api/sucursal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombreSuc: document.getElementById('nombreSuc').value,
+                        nit: document.getElementById('nit').value,
+                        fechaCreacion: document.getElementById('fechaCreacion').value,
+                        ciudad: { id: document.getElementById('ciudadId').value },
+                        empresa: { id: document.getElementById('empresaSucursalId').value }
+                    }),
+                });
+                alert(response.ok ? 'Sucursal guardada con éxito' : 'Error al guardar la sucursal');
+                document.getElementById('sucursalForm').reset();
+            };
+
+            document.getElementById('insumoForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const response = await fetch('/api/insumo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        codInterno: document.getElementById('codInterno').value,
+                        nombreInsumo: document.getElementById('nombreInsumo').value,
+                        valorUnit: document.getElementById('valorUnit').value,
+                        stock: document.getElementById('stock').value,
+                        stockMin: document.getElementById('stockMin').value,
+                        stockMax: document.getElementById('stockMax').value,
+                    }),
+                });
+                alert(response.ok ? 'Insumo guardado con éxito' : 'Error al guardar el insumo');
+                document.getElementById('insumoForm').reset();
+            };
+        </script>
+    </div>
 </body>
 </html>
