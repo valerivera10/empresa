@@ -7,70 +7,120 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
+            background-color: #f8f9fa; /* Color de fondo suave */
             display: flex;
-            flex-direction: column;
-            max-width: 400px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altura completa de la ventana */
+            margin: 0;
+        }
+        .container {
+            background-color: white; /* Fondo blanco para el formulario */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            max-width: 400px; /* Ancho máximo del formulario */
+            width: 100%; /* Ancho responsivo */
+        }
+        h1 {
+            text-align: center;
+            color: #343a40; /* Color del texto */
+            margin-bottom: 20px; /* Espaciado inferior */
         }
         label {
             margin: 10px 0 5px;
+            color: #495057; /* Color del texto de las etiquetas */
+            display: block; /* Para que las etiquetas ocupen toda la línea */
         }
         input, select {
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #ced4da; /* Borde gris claro */
             border-radius: 4px;
+            font-size: 14px; /* Tamaño de fuente */
+            transition: border-color 0.3s; /* Transición de color */
+            width: calc(100% - 22px); /* Ajustar el ancho para tener en cuenta el padding */
+            box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+        }
+        input:focus, select:focus {
+            border-color: #80bdff; /* Color de borde al enfocar */
+            outline: none; /* Sin contorno */
         }
         button {
             padding: 10px;
-            background-color: #28a745;
+            background-color: #28a745; /* Color verde */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px; /* Tamaño de fuente */
+            transition: background-color 0.3s; /* Transición de color */
+            width: 100%; /* Botón de ancho completo */
         }
         button:hover {
-            background-color: #218838;
+            background-color: #218838; /* Color verde más oscuro al pasar el mouse */
+        }
+        .loader {
+            display: none; /* Ocultamos el loader por defecto */
+            margin-top: 10px;
+            text-align: center; /* Centramos el texto del loader */
         }
     </style>
 </head>
 <body>
 
-<h1>Registro de Profesionales</h1>
-<form id="registroForm">
-    <label for="nroDoc">Número de Documento:</label>
-    <input type="text" id="nroDoc" required>
+<div class="container">
+    <h1>Registro de Profesionales</h1>
+    <form id="registroForm">
+        <label for="nroDoc">Número de Documento:</label>
+        <input type="text" id="nroDoc" required>
 
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" required>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
 
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" required>
 
-    <label for="sucursal">Sucursal:</label>
-    <select id="sucursal" required>
-        <!-- Las sucursales se cargarán aquí -->
-    </select>
+        <label for="sucursal">Sucursal:</label>
+        <select id="sucursal" required>
+            <option value="">Seleccione una sucursal</option> <!-- Opción por defecto -->
+            <option value="">Seleccione una sucursal</option>
+                <option value="1">Sucursal Central</option>
+                <option value="2">Sucursal Norte</option>
+                <option value="3">Sucursal Sur</option>
+                <option value="4">Sucursal Este</option>
+                <option value="5">Sucursal Oeste</option>
+                <option value="6">Sucursal Floridablanca</option>
+                <option value="7">Sucursal Bucaramanga</option>
+            <!-- Aquí puedes agregar más sucursales si es necesario -->
+        </select>
 
-    <label for="telefono">Número de Teléfono:</label>
-    <input type="text" id="telefono" required>
+        <label for="telefono">Número de Teléfono:</label>
+        <input type="text" id="telefono" required pattern="\d*" title="Por favor ingrese solo números.">
 
-    <label for="tipoTelefono">Tipo de Teléfono:</label>
-    <select id="tipoTelefono" required>
-        <!-- Los tipos de teléfono se cargarán aquí -->
-    </select>
+        <label for="tipoTelefono">Tipo de Teléfono:</label>
+        <select id="tipoTelefono" required>
+            <option value="">Seleccione un tipo de teléfono</option> <!-- Opción por defecto -->
+            <option value="1">Móvil</option>
+            <option value="2">Fijo</option>
+            <option value="3">Trabajo</option>
+            <option value="4">Fax</option>
+            <option value="5">Teléfono de Casa</option>
+            <!-- Aquí puedes agregar más tipos de teléfono si es necesario -->
+        </select>
 
-    <button type="submit">Registrar Profesional</button>
-</form>
+        <button type="submit">Registrar Profesional</button>
+        <div class="loader" id="loader">Registrando...</div> <!-- Loader para indicar el proceso -->
+    </form>
+</div>
 
 <script>
     async function loadSucursales() {
+        // Esta función puede ser utilizada si decides cargar las sucursales dinámicamente
         const response = await fetch('/api/sucursal');
         const sucursales = await response.json();
         const sucursalSelect = document.getElementById('sucursal');
-console.log(sucursales);
+
         sucursales.forEach(sucursal => {
             const option = document.createElement('option');
             option.value = sucursal.id; // Asumiendo que `id` es la clave de sucursal
@@ -83,7 +133,7 @@ console.log(sucursales);
         const response = await fetch('/api/tipotelefono');
         const tiposTelefono = await response.json();
         const tipoTelefonoSelect = document.getElementById('tipoTelefono');
-console.log(tiposTelefono);
+
         tiposTelefono.forEach(tipo => {
             const option = document.createElement('option');
             option.value = tipo.id; // Asumiendo que `id` es la clave de tipo
@@ -94,7 +144,10 @@ console.log(tiposTelefono);
 
     document.getElementById('registroForm').addEventListener('submit', async (event) => {
         event.preventDefault();
-        
+
+        // Muestra el loader
+        document.getElementById('loader').style.display = 'block';
+
         const nroDoc = document.getElementById('nroDoc').value;
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
@@ -142,13 +195,16 @@ console.log(tiposTelefono);
         } catch (error) {
             console.error('Error:', error);
             alert('Error al registrar profesional');
+        } finally {
+            // Oculta el loader
+            document.getElementById('loader').style.display = 'none';
         }
     });
 
     // Cargar sucursales y tipos de teléfono al cargar la página
     window.onload = async () => {
-        await loadSucursales();
         await loadTiposTelefono();
+        // loadSucursales() se mantiene si decides cargar las sucursales desde la API
     };
 </script>
 

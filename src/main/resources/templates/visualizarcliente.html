@@ -7,33 +7,89 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #e3f2fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            animation: fadeIn 1s ease-in;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            animation: scaleUp 0.5s ease-out;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
+            background-color: #f9fafc;
+            border-radius: 8px;
+            overflow: hidden;
         }
-        table, th, td {
-            border: 1px solid black;
-        }
+
         th, td {
-            padding: 10px;
+            padding: 15px;
             text-align: left;
+            border-bottom: 1px solid #e0e0e0;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #2980b9;
+            color: #ffffff;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        tr:hover td {
+            background-color: #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-3d:active {
+            box-shadow: 0 2px #1c5983;
+            transform: translateY(2px);
+        }
+
+        .btn-3d:hover {
+            transform: scale(1.1);
         }
     </style>
     <script>
         async function cargarClientes() {
-            const response = await fetch('/api/persona'); // Asegúrate de que esta ruta sea correcta
+            const response = await fetch('/api/persona');
             const personas = await response.json();
             const tablaClientes = document.getElementById('tabla-clientes');
 
             // Filtrar solo aquellos cuyo tipoPersona.id es 1
             const clientes = personas.filter(persona => persona.tipoPersona.id === 1);
-console.log(clientes);
+            console.log(clientes);
+
             clientes.forEach(cliente => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -51,20 +107,24 @@ console.log(clientes);
     </script>
 </head>
 <body>
-    <h1>Lista de Clientes</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Número de Documento</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Fecha de Registro</th>
-                <th>Sucursal</th>
-            </tr>
-        </thead>
-        <tbody id="tabla-clientes">
-            <!-- Aquí se llenarán los datos de los clientes -->
-        </tbody>
-    </table>
+    <div class="container">
+        <h1>Lista de Clientes</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Número de Documento</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha de Registro</th>
+                    <th>Sucursal</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-clientes">
+                <!-- Aquí se llenarán los datos de los clientes -->
+            </tbody>
+        </table>
+
+        
+    </div>
 </body>
 </html>
