@@ -57,6 +57,10 @@ public class incioControllers {
     }
 
 
+    @GetMapping("/visualizarproveedores")
+    public String visualizarproveedores(Model model){
+        return "visualizarproveedores";
+    }
 
 
 
@@ -68,49 +72,49 @@ public class incioControllers {
     public String VisualizarInsumosProveedores(Model model){
         return "VisualizarInsumosProveedores";
     }
-    @GetMapping("/Caso11")
-    public String Caso11(Model model){
-        return "Caso11";
+    @GetMapping("/caso11")
+    public String caso11(Model model){
+        return "caso11";
     }
-    @GetMapping("/Caso12")
-    public String Caso12(Model model){
-        return "Caso12";
+    @GetMapping("/caso12")
+    public String caso12(Model model){
+        return "caso12";
     }
-    @GetMapping("/Caso13")
-    public String Caso13(Model model){
-        return "Caso13";
+    @GetMapping("/caso13")
+    public String caso13(Model model){
+        return "caso13";
     }
-    @GetMapping("/Caso14")
-    public String Caso14(Model model){
-        return "Caso14";
+    @GetMapping("/caso14")
+    public String caso14(Model model){
+        return "caso14";
     }
-    @GetMapping("/Caso15")
-    public String Caso15(Model model){
-        return "Caso15";
+    @GetMapping("/caso15")
+    public String caso15(Model model){
+        return "caso15";
     }
-    @GetMapping("/Caso16")
-    public String Caso16(Model model){
-        return "Caso16";
+    @GetMapping("/caso16")
+    public String caso16(Model model){
+        return "caso16";
     }
-    @GetMapping("/Caso17")
-    public String Caso17(Model model){
-        return "Caso17";
+    @GetMapping("/caso17")
+    public String caso17(Model model){
+        return "caso17";
     }
-    @GetMapping("/Caso18")
-    public String Caso18(Model model){
-        return "Caso18";
+    @GetMapping("/caso18")
+    public String caso18(Model model){
+        return "caso18";
     }
-    @GetMapping("/Caso19")
-    public String Caso19(Model model){
-        return "Caso19";
+    @GetMapping("/caso19")
+    public String caso19(Model model){
+        return "caso19";
     }
-    @GetMapping("/Caso20")
-    public String Caso20(Model model){
-        return "Caso20";
+    @GetMapping("/caso20")
+    public String caso20(Model model){
+        return "caso20";
     }
-    @GetMapping("/Caso21")
-    public String Caso21(Model model){
-        return "Caso21";
+    @GetMapping("/caso21")
+    public String caso21(Model model){
+        return "caso21";
     }
     
 }

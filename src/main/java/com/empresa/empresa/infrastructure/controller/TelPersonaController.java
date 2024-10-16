@@ -62,4 +62,13 @@ public class TelPersonaController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/proveedor/{nroDoc}")
+    public ResponseEntity<List<TelPersona>> getTelefonos(@PathVariable Long nroDoc) {
+        List<TelPersona> telefonos = telPersonaService.findByNroDoc(nroDoc);
+        if (telefonos.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(telefonos, HttpStatus.OK);
+    }
 }

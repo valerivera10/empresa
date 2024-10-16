@@ -10,4 +10,5 @@ public interface ITipoPersonaService {
     TipoPersona save(TipoPersona tipoPersona);
     TipoPersona update(Long id, TipoPersona tipoPersona);
     void deleteById(Long id);
+    
 }

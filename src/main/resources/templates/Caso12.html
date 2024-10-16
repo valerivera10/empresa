@@ -4,47 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Personas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa; /* Color de fondo suave */
-            margin: 0;
-            padding: 20px; /* Espaciado alrededor del contenido */
-        }
-        h1 {
-            text-align: center; /* Centramos el título */
-            color: #343a40; /* Color del texto */
-        }
-        label {
-            display: block; /* Cada etiqueta ocupa toda la línea */
-            margin-bottom: 8px; /* Espaciado inferior */
-            color: #495057; /* Color del texto de las etiquetas */
-        }
-        select {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ced4da; /* Borde gris claro */
-            border-radius: 4px;
-            font-size: 14px; /* Tamaño de fuente */
-            width: 100%; /* Ancho completo */
-            box-sizing: border-box; /* Para que el padding no afecte el ancho total */
-        }
-        h2 {
-            color: #495057; /* Color del texto de los subtítulos */
-            margin-top: 30px; /* Espaciado superior */
-        }
-        ul {
-            list-style-type: none; /* Eliminamos los puntos de la lista */
-            padding: 0; /* Sin padding */
-        }
-        li {
-            background-color: #fff; /* Fondo blanco para los elementos de la lista */
-            margin: 10px 0; /* Espaciado entre elementos */
-            padding: 10px; /* Espaciado interno */
-            border: 1px solid #ced4da; /* Borde gris claro */
-            border-radius: 4px; /* Bordes redondeados */
-        }
-    </style>
     <script>
         async function fetchPersonas() {
             const response = await fetch('/api/persona');
@@ -70,7 +29,7 @@
                 const filteredordenes = ordenes.filter(orden => orden.empleado.nroDoc == selectedNroDoc);
 
                 const ordenList = document.getElementById('ordenList');
-                ordenList.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
+                ordenList.innerHTML = '';
 
                 filteredordenes.forEach(orden => {
                     const li = document.createElement('li');
@@ -83,14 +42,15 @@
         async function fetchOrdenesTrabajo() {
             const select = document.getElementById('personaSelect');
             const selectedNroDoc = select.value;
+            console.log(selectedNroDoc);
 
             if (selectedNroDoc) {
                 const response = await fetch(`/api/orden-trabajo`);
                 const ordenes = await response.json();
+                console.log(ordenes);
                 const filteredordenes = ordenes.filter(orden => orden.idEmpleado == selectedNroDoc);
-
                 const ordenTrabajoList = document.getElementById('ordenTrabajoList');
-                ordenTrabajoList.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
+                ordenTrabajoList.innerHTML = '';
 
                 filteredordenes.forEach(orden => {
                     const li = document.createElement('li');

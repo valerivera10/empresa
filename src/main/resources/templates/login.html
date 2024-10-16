@@ -7,6 +7,95 @@
     <link rel="stylesheet" href="css/estilosLogin.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800" rel="stylesheet">
 
+    <style>
+/* Estilos generales */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #e0e7ff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+h2 {
+    font-size: 28px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 40px 50px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+input[type="text"], input[type="password"] {
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+    background-color: #f7f7f7;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #6a11cb;
+    box-shadow: 0 4px 10px rgba(106, 17, 203, 0.2);
+    background-color: #fff;
+}
+
+button {
+    border-radius: 30px;
+    border: none;
+    background-color: #6a11cb;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #4e0ca3;
+    transform: translateY(-3px);
+}
+
+button:focus {
+    outline: none;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#signInForm {
+    width: 100%;
+}
+
+
+</style>
     
 </head>
 <body>
@@ -23,18 +112,8 @@
         <button type="submit">Sign In</button>
     </form>
     
+    
     </div>
-    <div class="overlay-container">
-      <div class="overlay">
-        
-        <div class="overlay-panel overlay-right">
-          <h1>Hola mundo!</h1>
-          <p>Registrate para iniciar a crear tus encuestas</p>
-          <button class="ghost" id="signUp">Proximamente</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </body>
 

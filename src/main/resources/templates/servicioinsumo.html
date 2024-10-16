@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Servicio Insumo</title>
+    <title>Formulario Servicio Insumo y Lista de Proveedores</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            margin: 20px;
         }
 
         .container {
@@ -22,6 +18,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             width: 400px;
             animation: fadeIn 0.5s ease;
+            margin-bottom: 20px;
         }
 
         @keyframes fadeIn {
@@ -80,42 +77,55 @@
         button:hover {
             transform: scale(1.05);
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
-    <script>
+
+ <script>
+        // Función para cargar servicios e insumos
         async function cargarDatos() {
-            // Datos de ejemplo para servicios e insumos
-            const servicios = [
-                { id: 1, nombre: 'Servicio de Limpieza' },
-                { id: 2, nombre: 'Servicio de Mantenimiento' },
-                { id: 3, nombre: 'Servicio de Entrega' },
-                { id: 4, nombre: 'Servicio de Atención al Cliente' }
-            ];
+            const [serviciosResponse, insumosResponse] = await Promise.all([
+                fetch('/api/servicio'),
+                fetch('/api/insumo')
+            ]);
 
-            const insumos = [
-                { id: 1, nombreInsumo: 'Detergente' },
-                { id: 2, nombreInsumo: 'Desinfectante' },
-                { id: 3, nombreInsumo: 'Herramientas' },
-                { id: 4, nombreInsumo: 'Material de Oficina' }
-            ];
+            const servicios = await serviciosResponse.json();
+            const insumos = await insumosResponse.json();
 
-            // Cargar servicios en el selector
+            // Cargar servicios en el select
             const servicioSelect = document.getElementById('servicio');
             servicios.forEach(servicio => {
                 const option = document.createElement('option');
-                option.value = servicio.id;
-                option.textContent = servicio.nombre;
+                option.value = servicio.id; // Asegúrate de que el ID del servicio esté correcto
+                option.textContent = servicio.nombre; // Cambia "nombre" al campo correcto
                 servicioSelect.appendChild(option);
             });
 
-            // Cargar insumos en el selector
+            // Cargar insumos en el select
             const insumoSelect = document.getElementById('insumo');
             insumos.forEach(insumo => {
                 const option = document.createElement('option');
-                option.value = insumo.id;
-                option.textContent = insumo.nombreInsumo;
+                option.value = insumo.id; // Asegúrate de que el ID del insumo esté correcto
+                option.textContent = insumo.nombreInsumo; // Cambia "nombre" al campo correcto
                 insumoSelect.appendChild(option);
             });
         }
+
+        
 
         async function enviarFormulario(event) {
             event.preventDefault();
@@ -147,7 +157,52 @@
             }
         }
 
-        window.onload = cargarDatos;
+        async function fetchProveedores() {
+            try {
+                const response = await fetch('/api/persona');
+                if (!response.ok) {
+                    throw new Error('Error al obtener los proveedores');
+                }
+                const personas = await response.json();
+                const proveedores = personas.filter(persona => persona.tipoPersona.id === 3);
+                const tableBody = document.querySelector('#proveedoresTable tbody');
+                tableBody.innerHTML = '';
+
+                for (const proveedor of proveedores) {
+                    const telefonos = await fetchTelefonos(proveedor.nroDoc);
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${proveedor.nroDoc}</td>
+                        <td>${proveedor.nombre}</td>
+                        <td>${proveedor.apellido}</td>
+                        <td>${telefonos.join(', ') || 'Sin teléfono'}</td>
+                        <td>${proveedor.sucursal.empresa.nombre}</td>
+                    `;
+                    tableBody.appendChild(row);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function fetchTelefonos(nroDoc) {
+            try {
+                const response = await fetch(`/api/telpersona/proveedor/${nroDoc}`);
+                if (!response.ok) {
+                    throw new Error('Error al obtener los teléfonos');
+                }
+                const telefonos = await response.json();
+                return telefonos.map(tel => tel.nro);
+            } catch (error) {
+                console.error('Error:', error);
+                return [];
+            }
+        }
+
+        window.onload = async function() {
+            await cargarDatos();
+            await fetchProveedores();
+        };
     </script>
 </head>
 <body>
@@ -170,5 +225,21 @@
             <button type="submit">Crear</button>
         </form>
     </div>
+
+    <h1>Lista de Proveedores</h1>
+    <table id="proveedoresTable">
+        <thead>
+            <tr>
+                <th>Nro Doc</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Teléfonos</th>
+                <th>Sucursal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se insertarán aquí -->
+        </tbody>
+    </table>
 </body>
 </html>

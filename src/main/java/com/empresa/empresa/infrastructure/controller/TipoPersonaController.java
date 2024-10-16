@@ -62,4 +62,5 @@ public class TipoPersonaController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    
 }

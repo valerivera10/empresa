@@ -44,4 +44,8 @@ public class TelPersonaAdapter implements ITelPersonaService {
     public void deleteById(Long id) {
         telPersonaRepository.deleteById(id);
     }
+
+    public List<TelPersona> findByNroDoc(Long nroDoc) {
+        return telPersonaRepository.findByPersona_NroDoc(nroDoc);
+    }
 }

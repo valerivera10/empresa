@@ -20,7 +20,7 @@ import com.empresa.empresa.domain.TipoTelefono;
 
 
 @RestController
-@RequestMapping("/api/tipo-telefono")
+@RequestMapping("/api/tipotelefono")
 public class TipoTelefonoController {
 
     @Autowired

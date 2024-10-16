@@ -10,5 +10,6 @@ public interface ITelPersonaService {
     TelPersona save(TelPersona telPersona);
     TelPersona update(Long id, TelPersona telPersona);
     void deleteById(Long id);
+    List<TelPersona> findByNroDoc(Long nroDoc);
 }
 
