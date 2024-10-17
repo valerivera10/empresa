@@ -32,9 +32,11 @@ public class SecurityConfig {
                 auth.requestMatchers(HttpMethod.GET, "/", "/login").permitAll();
                 auth.requestMatchers(HttpMethod.GET, "/", "/registrarcliente").hasAnyRole("ADMIN","CLIENTE");
                 auth.requestMatchers(HttpMethod.POST, "/","/api/persona").hasAnyRole("ADMIN","CLIENTE");
-                auth.requestMatchers(HttpMethod.GET, "/api/sucursal").hasAnyRole("ADMIN","CLIENTE","JEFERECUROSHUMANOS");
+                auth.requestMatchers(HttpMethod.GET, "/api/sucursal").hasAnyRole("ADMIN","CLIENTE","JEFERECUROSHUMANOS","GERENTE");
                 auth.requestMatchers(HttpMethod.GET, "/", "/registrarempleado").hasAnyRole("ADMIN","JEFERECUROSHUMANOS");
                 auth.requestMatchers(HttpMethod.POST, "/", "/api/persona").hasAnyRole("ADMIN","JEFERECUROSHUMANOS");
+                auth.requestMatchers(HttpMethod.GET, "/", "/caso12").hasAnyRole("ADMIN","PROFESIONALSERVICIO");
+                auth.requestMatchers(HttpMethod.GET, "/","/api/persona","/api/ordenservicio","/api/orden-trabajo").hasAnyRole("ADMIN","PROFESIONALSERVICIO");
 
                 auth.requestMatchers(HttpMethod.GET, "/index").hasAnyRole("ADMIN");
                 auth.requestMatchers(HttpMethod.GET, "/home").hasAnyRole("ADMIN", "USER");

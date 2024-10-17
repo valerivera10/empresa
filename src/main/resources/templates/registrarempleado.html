@@ -79,9 +79,31 @@
         button:hover {
             transform: scale(1.05);
         }
+
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logout a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #dc3545;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .logout a:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
     </style>
     <script>
-    async function cargarSucursales() {
+        async function cargarSucursales() {
             const response = await fetch('/api/sucursal');
             const sucursales = await response.json();
             const sucursalSelect = document.getElementById('sucursal');
@@ -93,7 +115,6 @@
                 sucursalSelect.appendChild(option);
             });
         }
-
 
         async function enviarFormulario(event) {
             event.preventDefault();
@@ -148,7 +169,6 @@
             <label for="fechaRegistro">Fecha de Registro:</label>
             <input type="date" id="fechaRegistro" required>
 
-         
             <label for="sucursal">Sucursal:</label>
             <select id="sucursal" required>
                 <option value="">Seleccione una sucursal</option>
@@ -157,6 +177,10 @@
 
             <button type="submit">Registrar</button>
         </form>
+        
+        <div class="logout">
+            <a href="logout">SALIR</a>
+        </div>
     </div>
 </body>
 </html>

@@ -37,5 +37,9 @@ public class PersonaInsumoPK implements Serializable {
         this.nro_documento = nro_documento;
         this.id_servicio = id_servicio;
     }
+    public PersonaInsumoPK() {
+    }
+
+    
     
 }

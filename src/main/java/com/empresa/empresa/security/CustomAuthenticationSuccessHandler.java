@@ -1,11 +1,10 @@
 package com.empresa.empresa.security;
 
+import java.io.IOException;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
-
-import java.io.IOException;
 
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -20,7 +19,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
                 // Determine redirect URL based on user roles
                 if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-                    redirectUrl = "/admin/dashboard.html"; // Admin HTML page
+                    redirectUrl = "/caso20"; // Admin HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_DEVELOPER"))) {
                     redirectUrl = "/developer/home.html"; // Developer HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_CLIENTE"))) {
@@ -36,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFEINVENTARIO"))) {
                     redirectUrl = "/jefeinventario/home.html"; // Jefe Inventario HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_PROFESIONALSERVICIO"))) {
-                    redirectUrl = "/profesionalservicio/home.html"; // Profesional Servicio HTML page
+                    redirectUrl = "/caso12"; // Profesional Servicio HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFESISTEMAS"))) {
                     redirectUrl = "/jefesistemas/home.html"; // Jefe Sistemas HTML page
                 }

@@ -2,120 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="css/estilosLogin.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     <style>
-/* Estilos generales */
-body {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #e0e7ff;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-}
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-h2 {
-    font-size: 28px;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 40px;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://your-business-image-link-here.jpg') no-repeat center center/cover;
+            position: relative;
+        }
 
-.container {
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    padding: 40px 50px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-}
+        /* Overlay for opacity */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for contrast */
+            z-index: 1;
+        }
 
-h1 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #333;
-}
+        .container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
 
-input[type="text"], input[type="password"] {
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    padding: 15px;
-    margin-bottom: 20px;
-    width: 100%;
-    font-size: 16px;
-    background-color: #f7f7f7;
-    transition: all 0.3s ease;
-}
+        .container:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+        }
 
-input[type="text"]:focus, input[type="password"]:focus {
-    outline: none;
-    border-color: #6a11cb;
-    box-shadow: 0 4px 10px rgba(106, 17, 203, 0.2);
-    background-color: #fff;
-}
+        h1 {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
 
-button {
-    border-radius: 30px;
-    border: none;
-    background-color: #6a11cb;
-    color: white;
-    padding: 15px;
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            transition: box-shadow 0.3s ease;
+        }
 
-button:hover {
-    background-color: #4e0ca3;
-    transform: translateY(-3px);
-}
+        input[type="text"]:focus, input[type="password"]:focus {
+            box-shadow: 0px 0px 10px rgba(0, 150, 255, 0.5);
+            outline: none;
+        }
 
-button:focus {
-    outline: none;
-}
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
 
-#signInForm {
-    width: 100%;
-}
+        button:focus {
+            outline: none;
+        }
 
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
 
-</style>
-    
+        .remember-me input {
+            margin-right: 10px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-  <h2>¡Hola! inicia sesión</h2>
-  <div class="container" id="container">    
-    <div class="form-container sign-in-container">
-      <form id="signInForm" action="/login" method="post">
-        <h1>Sign in</h1>
-        
-        
-        <input type="text" id="username" name="username" required>
-        <input type="password" id="password" name="password" required>
-        
-        <button type="submit">Sign In</button>
-    </form>
-    
-    
+
+    <div class="container">
+        <h1>Bienvenidos</h1>
+        <form id="signInForm" action="/login" method="post">
+            <div class="error-message" id="error-message"></div>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember Me</label>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
     </div>
 
+    <script>
+        // Basic client-side validation
+        document.getElementById('signInForm').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = '';
+
+            if (!username || !password) {
+                event.preventDefault();
+                errorMessage.textContent = 'Both fields are required.';
+            }
+        });
+    </script>
+
 </body>
-
-
 </html>

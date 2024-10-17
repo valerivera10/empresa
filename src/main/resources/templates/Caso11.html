@@ -7,12 +7,29 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Altura completa de la ventana */
+            display: flex;
+            justify-content: center; /* Centrado horizontal */
+            align-items: center; /* Centrado vertical */
+            background-color: #f8f9fa; /* Color de fondo opcional */
         }
         form {
             display: flex;
             flex-direction: column;
             max-width: 400px;
+            width: 100%; /* Asegurarse de que el formulario se ajuste a la pantalla */
+            background-color: white; /* Fondo blanco para el formulario */
+            padding: 20px; /* Espaciado interno */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+        }
+        h1 {
+            position: absolute; /* Hacer que el título no afecte el centrado */
+            top: 20px; /* Ajustar la posición superior */
+            text-align: center;
+            width: 100%; /* Asegurarse de que el título ocupe el ancho completo */
         }
         label {
             margin: 10px 0 5px;
@@ -22,6 +39,16 @@
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .logout a {
+            text-decoration: none;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
         }
         button {
             padding: 10px;
@@ -70,7 +97,7 @@
         const response = await fetch('/api/sucursal');
         const sucursales = await response.json();
         const sucursalSelect = document.getElementById('sucursal');
-console.log(sucursales);
+        console.log(sucursales);
         sucursales.forEach(sucursal => {
             const option = document.createElement('option');
             option.value = sucursal.id; // Asumiendo que `id` es la clave de sucursal
@@ -83,7 +110,7 @@ console.log(sucursales);
         const response = await fetch('/api/tipotelefono');
         const tiposTelefono = await response.json();
         const tipoTelefonoSelect = document.getElementById('tipoTelefono');
-console.log(tiposTelefono);
+        console.log(tiposTelefono);
         tiposTelefono.forEach(tipo => {
             const option = document.createElement('option');
             option.value = tipo.id; // Asumiendo que `id` es la clave de tipo
@@ -150,6 +177,11 @@ console.log(tiposTelefono);
         await loadSucursales();
         await loadTiposTelefono();
     };
+
+    <a href="logout">
+        <p>SALIR</p>
+    </a>
+
 </script>
 
 </body>

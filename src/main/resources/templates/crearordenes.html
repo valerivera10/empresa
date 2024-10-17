@@ -6,85 +6,161 @@
     <title>Gestión de Órdenes de Trabajo y Servicios</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            height: 100vh;
+            overflow-x: hidden; /* Evitar desbordamiento horizontal */
         }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
         h2 {
             margin-top: 40px;
+            color: #4a90e2;
         }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 500px; /* Ancho máximo del contenedor */
+            margin: 0 auto;
+        }
+
         form {
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin: 5px 0;
+            font-weight: bold;
+            color: #555;
         }
+
         input, select {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dfe3e8;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
         }
+
         button {
+            background-color: #4a90e2;
+            color: white;
             padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
         }
+
+        button:hover {
+            background-color: #357ab7;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .logout {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            display: none; /* Ocultar inicialmente */
         }
+
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #dddddd;
         }
+
         th, td {
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
+            color: #333;
         }
     </style>
 </head>
 <body>
 
-    <h1>Gestión de Órdenes de Trabajo y Servicios</h1>
+    <div class="container">
+        <h1>Gestión de Órdenes de Trabajo y Servicios</h1>
 
-    <!-- Sección para generar Órdenes de Trabajo -->
-    <h2>Generar Orden de Trabajo</h2>
-    <form id="ordenForm">
-        <label for="nroOrdenT">Número de Orden:</label>
-        <input type="text" id="nroOrdenT" required>
+        <!-- Sección para generar Órdenes de Trabajo -->
+        <h2>Generar Orden de Trabajo</h2>
+        <form id="ordenForm">
+            <label for="nroOrdenT">Número de Orden:</label>
+            <input type="text" id="nroOrdenT" required>
 
-        <label for="fechaAsignacion">Fecha de Asignación:</label>
-        <input type="date" id="fechaAsignacion" required>
+            <label for="fechaAsignacion">Fecha de Asignación:</label>
+            <input type="date" id="fechaAsignacion" required>
 
-        <label for="horaAsignacion">Hora de Asignación:</label>
-        <input type="time" id="horaAsignacion" required>
+            <label for="horaAsignacion">Hora de Asignación:</label>
+            <input type="time" id="horaAsignacion" required>
 
-        <label for="idEmpleado">ID del Empleado:</label>
-        <input type="number" id="idEmpleado" required>
+            <label for="idEmpleado">ID del Empleado:</label>
+            <input type="number" id="idEmpleado" required>
 
-        <button type="button" onclick="crearOrdenTrabajo()">Crear Orden de Trabajo</button>
-    </form>
+            <button type="button" onclick="crearOrdenTrabajo()">Crear Orden de Trabajo</button>
+        </form>
 
-    <!-- Sección para listar Servicios -->
-    <h2>Servicios Disponibles</h2>
-    <div id="serviciosList"></div>
+        <!-- Sección para listar Servicios -->
+        <h2>Servicios Disponibles</h2>
+        <div id="serviciosList"></div>
 
-    <!-- Sección para Responsabilidades de Servicios -->
-    <h2>Responsabilidades de Servicios</h2>
-    <form id="responsabilidadForm">
-        <label for="servicioId">Selecciona un Servicio:</label>
-        <select id="servicioId" required>
-            <option value="">-- Selecciona un Servicio --</option>
-        </select>
+        <!-- Sección para Responsabilidades de Servicios -->
+        <h2>Responsabilidades de Servicios</h2>
+        <form id="responsabilidadForm">
+            <label for="servicioId">Selecciona un Servicio:</label>
+            <select id="servicioId" required>
+                <option value="">-- Selecciona un Servicio --</option>
+            </select>
 
-        <label for="responsabilidad">Responsabilidad:</label>
-        <input type="text" id="responsabilidad" required>
+            <label for="responsabilidad">Responsabilidad:</label>
+            <input type="text" id="responsabilidad" required>
 
-        <button type="button" onclick="guardarResponsabilidad()">Guardar Responsabilidad</button>
-    </form>
+            <button type="button" onclick="guardarResponsabilidad()">Guardar Responsabilidad</button>
+        </form>
 
-    <div id="result"></div>
+        <div id="result"></div>
+
+        <div class="logout">
+            <a href="logout">SALIR</a>
+        </div>
+    </div>
 
     <script>
         // Función para cargar servicios
@@ -129,6 +205,7 @@
             });
             serviciosHTML += `</tbody></table>`;
             serviciosDiv.innerHTML = serviciosHTML;
+            serviciosDiv.querySelector('table').style.display = 'table'; // Mostrar la tabla
         }
 
         // Función para crear una nueva Orden de Trabajo
@@ -150,6 +227,8 @@
 
             if (response.ok) {
                 alert('Orden de Trabajo creada con éxito.');
+                // Resetear el formulario
+                document.getElementById('ordenForm').reset();
             } else {
                 alert('Error al crear la Orden de Trabajo.');
             }
@@ -164,6 +243,8 @@
             // Esto puede variar según tu implementación
 
             alert(`Responsabilidad "${responsabilidad}" guardada para el servicio con ID: ${servicioId}`);
+            // Resetear el formulario
+            document.getElementById('responsabilidadForm').reset();
         }
 
         // Cargar servicios al inicio

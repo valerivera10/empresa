@@ -5,20 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificar Detalle de Servicio</title>
     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efecto 3D */
+            padding: 30px;
+            width: 350px; /* Ancho ajustado de la caja */
+            text-align: center; /* Centramos el texto dentro de la caja */
+        }
+
+        h1 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block; /* Asegura que la etiqueta esté en su propia línea */
+        }
+
+        select {
+            width: 100%; /* Asegura que el select ocupe el 100% de la caja */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #dfe3e8;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px #3a7bc2;
+            width: 100%; /* Asegura que el botón ocupe el 100% de la caja */
+            font-size: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+
+        button:active {
+            box-shadow: 0 2px #3a7bc2;
+            transform: translateY(2px);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
         table {
-            width: 100%;
+            width: 100%; /* Asegura que la tabla ocupe el 100% de la caja */
             border-collapse: collapse;
             margin-top: 20px;
+            display: none; /* Ocultamos la tabla inicialmente */
         }
+
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #dddddd;
         }
+
         th, td {
             padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .logout {
+            margin-top: 30px;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
         }
     </style>
     <script>
@@ -40,7 +124,6 @@
             });
         }
 
-        
         async function verificarDetalles() {
             const servicioId = document.getElementById('servicioSelect').value;
             const response = await fetch(`/api/servicio/${servicioId}`);
@@ -54,13 +137,14 @@
 
             const detallesDeServicio = detalles.filter(detalle => detalle.servicio.id == servicioId);
             const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = ''; 
+            const table = document.getElementById('resultTable');
+            resultDiv.innerHTML = ''; // Limpiar resultados anteriores
 
             if (detallesDeServicio.length > 0) {
                 // Crear la tabla
                 let tableHTML = `
                     <h3>Detalles de Orden de Trabajo para el Servicio ID: ${servicioId}</h3>
-                    <table>
+                    <table id="resultTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -92,6 +176,7 @@
                     </table>
                 `;
                 resultDiv.innerHTML = tableHTML;
+                table.style.display = 'table'; // Mostrar la tabla
             } else {
                 resultDiv.innerHTML = `<h3>No hay detalles de orden de trabajo asociados a este servicio.</h3>`;
             }
@@ -102,13 +187,19 @@
     </script>
 </head>
 <body>
-    <h1>Verificar Detalle de Servicio</h1>
-    <label for="servicioSelect">Selecciona un Servicio:</label>
-    <select id="servicioSelect" required>
-        <option value="">-- Selecciona un Servicio --</option>
-    </select>
-    <button onclick="verificarDetalles()">Verificar</button>
+    <div class="container">
+        <h1>Verificar Detalle de Servicio</h1>
+        <label for="servicioSelect">Selecciona un Servicio:</label>
+        <select id="servicioSelect" required>
+            <option value="">-- Selecciona un Servicio --</option>
+        </select>
+        <button onclick="verificarDetalles()">Verificar</button>
 
-    <div id="result"></div>
+        <div class="result" id="result"></div>
+
+        <div class="logout">
+            <a href="logout">SALIR</a>
+        </div>
+    </div>
 </body>
 </html>
