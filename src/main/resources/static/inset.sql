@@ -183,3 +183,14 @@ INSERT INTO `persona_insumo` (`id_insumo`, `id_servicio`, `nro_documento`) VALUE
 (3, 3, '3030303030'),
 (4, 4, '4040404040'),
 (5, 5, '5050505050');
+
+INSERT INTO empresa.aprobacion_servicio
+(id, hallazgo, solucion, id_cliente, id_estado_aprobacion, no_orden, id_servicio)
+VALUES(25, 'rayon puerta trasera', 'pintar puerta ', 2020202020, 2, 2, 4);
+
+INSERT INTO empresa.estado_aprobacion
+(id, nombre)
+VALUES(1, 'en espera');
+INSERT INTO empresa.estado_aprobacion
+(id, nombre)
+VALUES(2, 'aprobado');

@@ -19,10 +19,10 @@
         .container {
             background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para efecto 3D */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
             padding: 30px;
-            width: 350px; /* Ancho ajustado de la caja */
-            text-align: center; /* Centramos el texto dentro de la caja */
+            width: 350px; 
+            text-align: center; 
         }
 
         h1 {
@@ -34,11 +34,11 @@
             font-size: 16px;
             color: #333;
             margin-bottom: 5px;
-            display: block; /* Asegura que la etiqueta esté en su propia línea */
+            display: block; 
         }
 
         select {
-            width: 100%; /* Asegura que el select ocupe el 100% de la caja */
+            width: 100%; 
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #dfe3e8;
@@ -55,7 +55,7 @@
             border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 4px #3a7bc2;
-            width: 100%; /* Asegura que el botón ocupe el 100% de la caja */
+            width: 100%; 
             font-size: 16px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             margin-top: 10px;
@@ -71,10 +71,10 @@
         }
 
         table {
-            width: 100%; /* Asegura que la tabla ocupe el 100% de la caja */
+            width: 100%; 
             border-collapse: collapse;
             margin-top: 20px;
-            display: none; /* Ocultamos la tabla inicialmente */
+            display: none;
         }
 
         table, th, td {
@@ -138,7 +138,7 @@
             const detallesDeServicio = detalles.filter(detalle => detalle.servicio.id == servicioId);
             const resultDiv = document.getElementById('result');
             const table = document.getElementById('resultTable');
-            resultDiv.innerHTML = ''; // Limpiar resultados anteriores
+            resultDiv.innerHTML = ''; 
 
             if (detallesDeServicio.length > 0) {
                 // Crear la tabla
@@ -176,7 +176,7 @@
                     </table>
                 `;
                 resultDiv.innerHTML = tableHTML;
-                table.style.display = 'table'; // Mostrar la tabla
+                table.style.display = 'table'; 
             } else {
                 resultDiv.innerHTML = `<h3>No hay detalles de orden de trabajo asociados a este servicio.</h3>`;
             }

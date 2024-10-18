@@ -104,7 +104,7 @@
         async function fetchProfesionales() {
             const response = await fetch('/api/persona');
             const profesionales = await response.json();
-            const filteredProfesionales = profesionales.filter(persona => persona.tipoPersona.id === 4); // Asumiendo que 4 es "profesional"
+            const filteredProfesionales = profesionales.filter(persona => persona.tipoPersona.id === 4); 
             
             filteredProfesionales.forEach(profesional => {
                 const option = document.createElement('option');
@@ -142,14 +142,14 @@
 
         function clearForm() {
             empleadoSelect.value = '';
-            estadoSelect.value = '1'; // Default to "Nuevo"
+            estadoSelect.value = '1'; 
             editingOrderId = null;
         }
 
         function editOrder(orden) {
             empleadoSelect.value = orden.empleado.nroDoc;
             estadoSelect.value = orden.estado.id;
-            editingOrderId = orden.nroOrdenT; // Store the ID of the order being edited
+            editingOrderId = orden.nroOrdenT; 
         }
 
         document.getElementById('saveButton').addEventListener('click', saveOrder);

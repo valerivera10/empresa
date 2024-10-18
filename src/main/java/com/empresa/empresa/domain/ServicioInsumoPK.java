@@ -13,7 +13,7 @@ public class ServicioInsumoPK implements Serializable {
     private Long id_servicio;
     private Long id_insumo;
 
-    // No-argument constructor
+    
     public ServicioInsumoPK() {}
 
     public ServicioInsumoPK(Long id_insumo, Long id_servicio) {

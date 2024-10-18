@@ -113,7 +113,7 @@ RoleEntity roleJefeBodega = RoleEntity.builder()
 
 RoleEntity roleCliente = RoleEntity.builder()
 .roleEnum(RoleEnum.CLIENTE)
-.permissionList(Set.of(readPermission)) // Adjust permissions as needed
+.permissionList(Set.of(readPermission)) 
 .build();
 
 RoleEntity roleGerente = RoleEntity.builder()
@@ -241,9 +241,6 @@ UserEntity userJefeSistemas = UserEntity.builder()
 .credentialNoExpired(true)
 .roles(Set.of(roleJefeSistemas))
 .build();
-
-        //     userRepository.saveAll(List.of(userSantiago, userDaniel, userAndrea, userAnyi,userJefeBodega,userCliente,
-        //     userGerente, userJefeInventario, userJefeRecursosHumanos, userJefeMarketing, userJefeCompra, userProfesionalServicio, userJefeSistemas));
 
 
         };

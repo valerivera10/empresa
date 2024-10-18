@@ -15,7 +15,7 @@
             align-items: flex-start;
             flex-direction: column;
             height: 100vh;
-            overflow-x: hidden; /* Evitar desbordamiento horizontal */
+            overflow-x: hidden;
         }
 
         h1 {
@@ -35,7 +35,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 100%;
-            max-width: 500px; /* Ancho máximo del contenedor */
+            max-width: 500px; 
             margin: 0 auto;
         }
 
@@ -96,7 +96,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            display: none; /* Ocultar inicialmente */
+            display: none; 
         }
 
         table, th, td {
@@ -239,8 +239,6 @@
             const servicioId = document.getElementById('servicioId').value;
             const responsabilidad = document.getElementById('responsabilidad').value;
 
-            // Aquí deberías realizar la lógica para guardar la responsabilidad
-            // Esto puede variar según tu implementación
 
             alert(`Responsabilidad "${responsabilidad}" guardada para el servicio con ID: ${servicioId}`);
             // Resetear el formulario

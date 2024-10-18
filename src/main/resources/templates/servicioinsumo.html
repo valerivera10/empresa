@@ -65,7 +65,7 @@
             box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
         }
 
-        /* Botón 3D */
+        
         button {
             background-color: #4a90e2;
             color: white;
@@ -120,8 +120,8 @@
             const servicioSelect = document.getElementById('servicio');
             servicios.forEach(servicio => {
                 const option = document.createElement('option');
-                option.value = servicio.id; // Asegúrate de que el ID del servicio esté correcto
-                option.textContent = servicio.nombre; // Cambia "nombre" al campo correcto
+                option.value = servicio.id; 
+                option.textContent = servicio.nombre; 
                 servicioSelect.appendChild(option);
             });
 
@@ -129,8 +129,8 @@
             const insumoSelect = document.getElementById('insumo');
             insumos.forEach(insumo => {
                 const option = document.createElement('option');
-                option.value = insumo.id; // Asegúrate de que el ID del insumo esté correcto
-                option.textContent = insumo.nombreInsumo; // Cambia "nombre" al campo correcto
+                option.value = insumo.id; 
+                option.textContent = insumo.nombreInsumo; 
                 insumoSelect.appendChild(option);
             });
         }
@@ -248,7 +248,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Los datos se insertarán aquí -->
+           
         </tbody>
     </table>
 

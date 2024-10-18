@@ -45,7 +45,7 @@
             </tr>
         </thead>
         <tbody id="insumosTableBody">
-            <!-- Dynamic content will be inserted here -->
+           
         </tbody>
     </table>
 
@@ -73,7 +73,7 @@
                 });
 
                 const tableBody = document.getElementById('insumosTableBody');
-                tableBody.innerHTML = ''; // Clear the table body
+                tableBody.innerHTML = '';
 
                 for (const insumo of insumos) {
                     const personas = insumoMap[insumo.id] ? insumoMap[insumo.id].personas : [];

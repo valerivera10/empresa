@@ -37,11 +37,11 @@
     </style>
     <script>
         async function cargarClientes() {
-            const response = await fetch('/api/persona'); // Asegúrate de que esta ruta sea correcta
+            const response = await fetch('/api/persona'); 
             const personas = await response.json();
             const tablaClientes = document.getElementById('tabla-clientes');
 
-            // Filtrar solo aquellos cuyo tipoPersona.id es 1
+           
             const clientes = personas.filter(persona => persona.tipoPersona.id === 1);
 console.log(clientes);
             clientes.forEach(cliente => {
@@ -73,7 +73,7 @@ console.log(clientes);
             </tr>
         </thead>
         <tbody id="tabla-clientes">
-            <!-- Aquí se llenarán los datos de los clientes -->
+            
         </tbody>
     </table>
 

@@ -120,7 +120,7 @@ button:hover {
     </div>
 
     <script>
-        // Fetch the list of order numbers and services when the page loads
+        
         document.addEventListener('DOMContentLoaded', function() {
             fetch('/api/ordenservicio')
                 .then(response => response.json())
@@ -128,9 +128,9 @@ button:hover {
                     const noOrdenSelect = document.getElementById('noOrden');
                     data.forEach(orden => {
                         const option = document.createElement('option');
-                        option.value = orden.noOrden; // Adjust according to your API response
-                        option.textContent = orden.noOrden; // Display order number
-                        option.dataset.clienteId = orden.cliente.nroDoc; // Store client ID in dataset
+                        option.value = orden.noOrden; 
+                        option.textContent = orden.noOrden; 
+                        option.dataset.clienteId = orden.cliente.nroDoc; 
                         noOrdenSelect.appendChild(option);
                     });
                 })
@@ -138,14 +138,14 @@ button:hover {
                     console.error('Error fetching order numbers:', error);
                 });
 
-            fetch('/api/servicio') // Fetch services from the API
+            fetch('/api/servicio') 
                 .then(response => response.json())
                 .then(data => {
                     const idServicioSelect = document.getElementById('idServicio');
                     data.forEach(servicio => {
                         const option = document.createElement('option');
-                        option.value = servicio.id; // Adjust according to your API response
-                        option.textContent = servicio.nombre; // Display service name
+                        option.value = servicio.id; 
+                        option.textContent = servicio.nombre; 
                         idServicioSelect.appendChild(option);
                     });
                 })
@@ -159,9 +159,9 @@ button:hover {
             const clienteId = selectedOption.dataset.clienteId;
 
             if (clienteId) {
-                document.getElementById('idCliente').value = clienteId; // Set the client ID
+                document.getElementById('idCliente').value = clienteId;
             } else {
-                document.getElementById('idCliente').value = ''; // Clear if no client ID
+                document.getElementById('idCliente').value = ''; 
             }
         });
 
@@ -199,11 +199,11 @@ console.log(data);
             })
             .then(data => {
                 document.getElementById('responseMessage').innerHTML = <div class="alert alert-success">Aprobación creada con éxito: ${data.id}</div>;
-                // Clear form fields
+                
                 document.getElementById('aprobacionForm').reset();
-                document.getElementById('noOrden').innerHTML = '<option value="">Seleccione una orden</option>'; // Reset dropdown
-                document.getElementById('idServicio').innerHTML = '<option value="">Seleccione un servicio</option>'; // Reset services dropdown
-                // Reload order numbers and services
+                document.getElementById('noOrden').innerHTML = '<option value="">Seleccione una orden</option>'; 
+                document.getElementById('idServicio').innerHTML = '<option value="">Seleccione un servicio</option>'; 
+               
                 return Promise.all([
                     fetch('/api/ordenservicio'),
                     fetch('/api/servicio')
@@ -216,17 +216,17 @@ console.log(data);
                 const noOrdenSelect = document.getElementById('noOrden');
                 ordenes.forEach(orden => {
                     const option = document.createElement('option');
-                    option.value = orden.noOrden; // Adjust according to your API response
-                    option.textContent = orden.noOrden; // Display order number
-                    option.dataset.clienteId = orden.cliente.nroDoc; // Store client ID in dataset
+                    option.value = orden.noOrden; 
+                    option.textContent = orden.noOrden; 
+                    option.dataset.clienteId = orden.cliente.nroDoc; 
                     noOrdenSelect.appendChild(option);
                 });
 
                 const idServicioSelect = document.getElementById('idServicio');
                 servicios.forEach(servicio => {
                     const option = document.createElement('option');
-                    option.value = servicio.id; // Adjust according to your API response
-                    option.textContent = servicio.nombre; // Display service name
+                    option.value = servicio.id; 
+                    option.textContent = servicio.nombre; 
                     idServicioSelect.appendChild(option);
                 });
             })

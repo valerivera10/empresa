@@ -9,27 +9,27 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Altura completa de la ventana */
+            height: 100vh; 
             display: flex;
-            justify-content: center; /* Centrado horizontal */
-            align-items: center; /* Centrado vertical */
-            background-color: #f8f9fa; /* Color de fondo opcional */
+            justify-content: center; 
+            align-items: center;
+            background-color: #f8f9fa; 
         }
         form {
             display: flex;
             flex-direction: column;
             max-width: 400px;
-            width: 100%; /* Asegurarse de que el formulario se ajuste a la pantalla */
-            background-color: white; /* Fondo blanco para el formulario */
-            padding: 20px; /* Espaciado interno */
-            border-radius: 8px; /* Bordes redondeados */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidad */
+            width: 100%; 
+            background-color: white; 
+            padding: 20px; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
         }
         h1 {
-            position: absolute; /* Hacer que el título no afecte el centrado */
-            top: 20px; /* Ajustar la posición superior */
+            position: absolute; 
+            top: 20px; 
             text-align: center;
-            width: 100%; /* Asegurarse de que el título ocupe el ancho completo */
+            width: 100%; 
         }
         label {
             margin: 10px 0 5px;
@@ -78,7 +78,7 @@
 
     <label for="sucursal">Sucursal:</label>
     <select id="sucursal" required>
-        <!-- Las sucursales se cargarán aquí -->
+        
     </select>
 
     <label for="telefono">Número de Teléfono:</label>
@@ -86,7 +86,7 @@
 
     <label for="tipoTelefono">Tipo de Teléfono:</label>
     <select id="tipoTelefono" required>
-        <!-- Los tipos de teléfono se cargarán aquí -->
+        
     </select>
 
     <button type="submit">Registrar Profesional</button>
@@ -100,8 +100,8 @@
         console.log(sucursales);
         sucursales.forEach(sucursal => {
             const option = document.createElement('option');
-            option.value = sucursal.id; // Asumiendo que `id` es la clave de sucursal
-            option.textContent = sucursal.empresa.nombre; // Asumiendo que `nombre` es la propiedad
+            option.value = sucursal.id; 
+            option.textContent = sucursal.empresa.nombre; 
             sucursalSelect.appendChild(option);
         });
     }
@@ -113,8 +113,8 @@
         console.log(tiposTelefono);
         tiposTelefono.forEach(tipo => {
             const option = document.createElement('option');
-            option.value = tipo.id; // Asumiendo que `id` es la clave de tipo
-            option.textContent = tipo.descripcion; // Asumiendo que `descripcion` es la propiedad
+            option.value = tipo.id; 
+            option.textContent = tipo.descripcion; 
             tipoTelefonoSelect.appendChild(option);
         });
     }
@@ -130,10 +130,10 @@
         const tipoTelefonoId = document.getElementById('tipoTelefono').value;
 
         const data = {
-            fecha_registro: new Date().toISOString().slice(0, 10), // Formato YYYY-MM-DD
+            fecha_registro: new Date().toISOString().slice(0, 10), 
             id_sucursal: sucursalId,
             nro_doc: nroDoc,
-            tipo_persona_id: 4, // Tipo de persona para profesionales
+            tipo_persona_id: 4, 
             nombre: nombre,
             apellido: apellido
         };
@@ -172,7 +172,7 @@
         }
     });
 
-    // Cargar sucursales y tipos de teléfono al cargar la página
+    
     window.onload = async () => {
         await loadSucursales();
         await loadTiposTelefono();

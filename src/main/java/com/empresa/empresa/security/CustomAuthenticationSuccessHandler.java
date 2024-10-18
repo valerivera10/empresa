@@ -15,7 +15,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(jakarta.servlet.http.HttpServletRequest request,
             jakarta.servlet.http.HttpServletResponse response, Authentication authentication)
             throws IOException, jakarta.servlet.ServletException {
-                String redirectUrl = "/home"; // Default URL
+                String redirectUrl = "/home"; 
 
                 // Determine redirect URL based on user roles
                 if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
