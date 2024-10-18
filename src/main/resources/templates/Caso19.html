@@ -10,110 +10,109 @@
 
 <style>
     /* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #60acdf, #b466d6);
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-/* Contenedor principal */
-.container {
-    max-width: 600px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centrar el contenido dentro del contenedor */
-}
+    /* Contenedor principal */
+    .container {
+        max-width: 600px;
+        border: 5px solid rgb(0, 0, 0);
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9 ); 
+        text-align: center;
+    }
 
-/* Estilos para el título */
-h1 {
-    margin-bottom: 20px;
-    color: #007bff;
-}
+    h1 {
+        margin-bottom: 20px;
+        color: #007bff;
+    }
 
-/* Estilos para el formulario */
-.form-group {
-    margin-bottom: 20px;
-    text-align: left; /* Opcional: Alinear etiquetas a la izquierda */
-}
+    /* Estilos para el formulario */
+    .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
 
-label {
-    font-weight: bold;
-}
+    label {
+        font-weight: bold;
+    }
 
-select.form-control {
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ced4da;
-    transition: border-color 0.3s ease-in-out;
-}
+    select.form-control {
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+        transition: border-color 0.3s ease-in-out;
+    }
 
-select.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+    select.form-control:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
 
-/* Botón */
-button.btn-primary {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 4px;
-    background-color: #007bff;
-    border: none;
-    transition: background-color 0.3s ease;
-}
+    /* Botón */
+    button.btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 4px;
+        background-color: #007bff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
 
-button.btn-primary:hover {
-    background-color: #0056b3;
-}
+    button.btn-primary:hover {
+        background-color: #0056b3;
+    }
 
-/* Detalles de la orden */
-#orderDetails {
-    margin-top: 30px;
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 4px;
-    border: 1px solid #ced4da;
-}
+    /* Detalles de la orden */
+    #orderDetails {
+        margin-top: 30px;
+        background-color: #e9ecef;
+        padding: 20px;
+        border-radius: 4px;
+        border: 1px solid #ced4da;
+    }
 
-#orderDetails h3 {
-    margin-top: 0;
-    color: #495057;
-}
+    #orderDetails h3 {
+        margin-top: 0;
+        color: #495057;
+    }
 
-#orderDetails p {
-    margin: 10px 0;
-    font-size: 16px;
-}
+    #orderDetails p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
 
-/* Mensaje de error */
-.alert-danger {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 20px;
-}
-
+    /* Mensaje de error */
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
 </style>
 
 <body>
     <div class="container mt-5">
         <h1>Consultar Autorizaciones aprobadas</h1>
         <div class="form-group">
-            <label for="noOrden">Número de autorizacion</label>
+            <label for="noOrden">Número de autorización</label>
             <select class="form-control" id="noOrden" required>
-                <option value="">Seleccione una autorizacion</option>
+                <option value="">Seleccione una autorización</option>
             </select>
         </div>
         <button id="fetchButton" class="btn btn-primary">Obtener Detalles</button>
@@ -126,14 +125,13 @@ button.btn-primary:hover {
             fetch('/api/aprobacionservicio')
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     const noOrdenSelect = document.getElementById('noOrden');
                     data.forEach(orden => {
                         if (orden.estadoAprobacion.id == 2) {
-                        const option = document.createElement('option');
-                        option.value = orden.id; // Adjust according to your API response
-                        option.textContent = orden.id; // Display order number
-                        noOrdenSelect.appendChild(option);
+                            const option = document.createElement('option');
+                            option.value = orden.id;
+                            option.textContent = orden.id;
+                            noOrdenSelect.appendChild(option);
                         }
                     });
                 })
@@ -150,7 +148,7 @@ button.btn-primary:hover {
                 return;
             }
 
-            fetch('/api/aprobacionservicio/${noOrden}')
+            fetch(`/api/aprobacionservicio/${noOrden}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Orden no encontrada');
@@ -159,31 +157,28 @@ button.btn-primary:hover {
                 })
                 .then(data => {
                     const orderDetailsDiv = document.getElementById('orderDetails');
-                    console.log(data);
-                  
-                
                     orderDetailsDiv.innerHTML = `
-                        <h3>Detalles de la Autorizacion</h3>
+                        <h3>Detalles de la Autorización</h3>
                         <p><strong>Número de Orden:</strong> ${data.ordenServicio.noOrden}</p>
                         <p><strong>ID Cliente:</strong> ${data.ordenServicio.cliente.nroDoc}</p>
-
                         <p><strong>Nombre Cliente:</strong> ${data.ordenServicio.cliente.nombre}</p>
                         <p><strong>ID Servicio:</strong> ${data.servicio.id}</p>
-                                                <p><strong>Nombre Servicio:</strong> ${data.servicio.nombre}</p>
-
+                        <p><strong>Nombre Servicio:</strong> ${data.servicio.nombre}</p>
                         <p><strong>Estado:</strong> aprobado</p>
-                        <p><strong>hallazgo:</strong> ${data.hallazgo}</p>
-                          <p><strong>solucion:</strong> ${data.solucion}</p>
+                        <p><strong>Hallazgo:</strong> ${data.hallazgo}</p>
+                        <p><strong>Solución:</strong> ${data.solucion}</p>
                     `;
-                    console.log('Order details:', data);
                 })
                 .catch(error => {
                     const orderDetailsDiv = document.getElementById('orderDetails');
-                    orderDetailsDiv.innerHTML = <div class="alert alert-danger">${error.message}</div>;
+                    orderDetailsDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
                 });
         });
     </script>
+
+    <div class="logout">
+        <a href="logout">SALIR</a>
+    </div>
 </body>
 
 </html>
-

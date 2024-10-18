@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Persona</title>
+    <title>Registro de Cliente</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
+            background: linear-gradient(to right, #60acdf, #b466d6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,31 +18,18 @@
         .container {
             background-color: #ffffff;
             padding: 20px;
+            border: 5px solid black;
             border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 50px rgba(0, 0, 0, 1);
             width: 400px;
             animation: fadeIn 0.5s ease;
-        }
-        .logout {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .logout a {
-            text-decoration: none;
-            color: #dc3545;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
             text-align: center;
-            color: #333333;
+            color: #4a90e2;
             margin-bottom: 20px;
+            animation: slideIn 0.5s ease;
         }
 
         label {
@@ -60,6 +47,7 @@
             border-radius: 5px;
             font-size: 14px;
             box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         input:focus, select:focus {
@@ -69,29 +57,56 @@
         }
 
         button {
-            background-color: #4a90e2;
+            background-color: #28a745;
             color: white;
             padding: 12px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px #3a7bc2;
+            box-shadow: 0 4px #218838;
             width: 100%;
             font-size: 16px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         button:active {
-            box-shadow: 0 2px #3a7bc2;
+            box-shadow: 0 2px #218838;
             transform: translateY(2px);
         }
 
         button:hover {
             transform: scale(1.05);
         }
+
+        .logout {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .logout a:hover {
+            color: #c82333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
     </style>
     <script>
-    async function cargarSucursales() {
+        async function cargarSucursales() {
             const response = await fetch('/api/sucursal');
             const sucursales = await response.json();
             const sucursalSelect = document.getElementById('sucursal');
@@ -161,15 +176,13 @@
             <select id="sucursal" required>
                 <option value="">Seleccione una sucursal</option>
             </select>
-            <br><br>
-            
 
             <button type="submit">Registrar</button>
         </form>
 
-        <a href="logout">
-            <P>SALIR</P>
-          </a> 
+        <div class="logout">
+            <a href="logout">SALIR</a>
+        </div> 
     </div>
 </body>
 </html>

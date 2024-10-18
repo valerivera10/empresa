@@ -9,16 +9,18 @@
 <style>
     body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background: linear-gradient(to right, #60acdf, #b466d6);
 }
 
 .container {
+    box-shadow: 0 30px 10
+    0px rgba(0, 0, 0, 1 ); 
+    border: 5px solid rgb(0, 0, 0);
     max-width: 600px;
     margin: 0 auto;
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 }
 
 h1 {
@@ -234,6 +236,11 @@ console.log(data);
                 document.getElementById('responseMessage').innerHTML = <div class="alert alert-danger">${error.message}</div>;
             });
         });
+
+        <div class="logout">
+            <a href="logout">SALIR</a>
+        </div>
+
     </script>
 </body>
 </html>

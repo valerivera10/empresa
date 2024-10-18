@@ -7,28 +7,42 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
-            margin: 20px;
+            background-color: #d7e6f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
 
         .container {
             background-color: #ffffff;
-            padding: 20px;
+            padding: 30px;
+            border: 5px solid black;
             border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 50px rgba(0, 0, 0, 1);
             width: 400px;
             animation: fadeIn 0.5s ease;
             margin-bottom: 20px;
+            text-align: center;
         }
+
         .logout {
             text-align: center;
             margin-top: 30px;
         }
+
         .logout a {
             text-decoration: none;
             color: #dc3545;
             font-weight: bold;
             font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        .logout a:hover {
+            color: #c82333;
         }
 
         @keyframes fadeIn {
@@ -37,8 +51,7 @@
         }
 
         h1 {
-            text-align: center;
-            color: #333333;
+            color: #4a90e2;
             margin-bottom: 20px;
         }
 
@@ -57,6 +70,7 @@
             border-radius: 5px;
             font-size: 14px;
             box-sizing: border-box;
+            transition: border-color 0.3s ease;
         }
 
         select:focus, input[type="number"]:focus {
@@ -65,7 +79,6 @@
             box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
         }
 
-        
         button {
             background-color: #4a90e2;
             color: white;
@@ -76,7 +89,12 @@
             box-shadow: 0 4px #3a7bc2;
             width: 100%;
             font-size: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a7bc2;
+            transform: scale(1.05);
         }
 
         button:active {
@@ -84,28 +102,31 @@
             transform: translateY(2px);
         }
 
-        button:hover {
-            transform: scale(1.05);
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            animation: fadeIn 0.5s ease;
         }
 
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
+            transition: background-color 0.3s ease;
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 
- <script>
+    <script>
         // Función para cargar servicios e insumos
         async function cargarDatos() {
             const [serviciosResponse, insumosResponse] = await Promise.all([
@@ -134,8 +155,6 @@
                 insumoSelect.appendChild(option);
             });
         }
-
-        
 
         async function enviarFormulario(event) {
             event.preventDefault();
@@ -252,9 +271,8 @@
         </tbody>
     </table>
 
-    <a href="logout">
-        <P>SALIR</P>
-      </a>
-
+    <div class="logout">
+        <a href="logout">SALIR</a>
+    </div>
 </body>
 </html>
