@@ -28,7 +28,7 @@ public class SecurityConfig {
         return httpSecurity
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/css/**", "/js/**", "/images/**").permitAll();
+                auth.requestMatchers("/css/", "/js/", "/images/").permitAll();
                 auth.requestMatchers(HttpMethod.GET, "/", "/login").permitAll();
                 auth.requestMatchers(HttpMethod.GET, "/", "/registrarcliente").hasAnyRole("ADMIN","CLIENTE");
                 auth.requestMatchers(HttpMethod.POST, "/","/api/persona").hasAnyRole("ADMIN","CLIENTE");
@@ -36,13 +36,18 @@ public class SecurityConfig {
                 auth.requestMatchers(HttpMethod.GET, "/", "/registrarempleado").hasAnyRole("ADMIN","JEFERECUROSHUMANOS");
                 auth.requestMatchers(HttpMethod.POST, "/", "/api/persona").hasAnyRole("ADMIN","JEFERECUROSHUMANOS");
                 auth.requestMatchers(HttpMethod.GET, "/", "/caso12").hasAnyRole("ADMIN","PROFESIONALSERVICIO");
-                auth.requestMatchers(HttpMethod.GET, "/","/api/persona","/api/ordenservicio","/api/orden-trabajo").hasAnyRole("ADMIN","PROFESIONALSERVICIO");
+                auth.requestMatchers(HttpMethod.GET, "/","/api/persona","/api/ordenservicio","/api/orden-trabajo").hasAnyRole("ADMIN","PROFESIONALSERVICIO","JEFEBODEGA","JEFEMARKETING");
+                auth.requestMatchers(HttpMethod.GET, "/","/api/servicio","/api/insumo","/api/servicioinsumo","/api/telpersona/").hasAnyRole("ADMIN","JEFEBODEGA");
+                auth.requestMatchers(HttpMethod.GET, "/","/visualizarcliente").hasAnyRole("ADMIN","JEFEMARKETING");
 
+                auth.requestMatchers(HttpMethod.GET, "/servicioinsumo").hasAnyRole("ADMIN","JEFEBODEGA");
                 auth.requestMatchers(HttpMethod.GET, "/index").hasAnyRole("ADMIN");
                 auth.requestMatchers(HttpMethod.GET, "/home").hasAnyRole("ADMIN", "USER");
                 auth.requestMatchers(HttpMethod.GET, "/users").hasAnyRole("ADMIN", "USER");
                 auth.requestMatchers(HttpMethod.GET, "/gestion").hasRole("ADMIN");
                 auth.requestMatchers(HttpMethod.POST, "/auth/post").hasAnyRole("ADMIN", "DEVELOPER");
+                auth.requestMatchers(HttpMethod.POST, "/api/servicioinsumo").hasAnyRole("ADMIN", "JEFEBODEGA");
+
                 auth.anyRequest().hasAnyRole("ADMIN");
             })
             .formLogin(form -> form

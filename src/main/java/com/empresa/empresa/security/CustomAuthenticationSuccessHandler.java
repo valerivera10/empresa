@@ -25,11 +25,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_CLIENTE"))) {
                     redirectUrl = "/registrarcliente"; // Cliente HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFEBODEGA"))) {
-                    redirectUrl = "/jefebodega/home.html"; // Jefe Bodega HTML page
+                    redirectUrl = "/servicioinsumo"; // Jefe Bodega HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFERECUROSHUMANOS"))) {
                     redirectUrl = "/registrarempleado"; // Jefe Recursos Humanos HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFEMARKETING"))) {
-                    redirectUrl = "/jefemarketing/home.html"; // Jefe Marketing HTML page
+                    redirectUrl = "/visualizarcliente"; // Jefe Marketing HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFECOMPRA"))) {
                     redirectUrl = "/jefec compra/home.html"; // Jefe Compra HTML page
                 } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_JEFEINVENTARIO"))) {
